@@ -5,7 +5,7 @@
     * [Client.Classes]()
     * [Client.endpoint]()
 * Instance References
-    * [Client.edit]()
+    * [Client.edit](#Edit)
     * [Client.fetchAllBots()]
     * [Client.fetchAllEmojis()]
     * [Client.fetchAllGuilds()]
@@ -19,6 +19,8 @@
     * [Client.fetchUser()]
     * [Client.hasUpvoted()]
     * [Client.setGuilds()]
+
+## Instance Functions
 
 ### Client.edit(options, ?preset) => ClientOptions
 
