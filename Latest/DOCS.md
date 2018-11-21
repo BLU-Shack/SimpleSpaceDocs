@@ -1,220 +1,329 @@
-# Global
+<a name="Client"></a>
 
+## Client
+Main client class for interacting to botlist.space
 
+**Kind**: global class
 
+* [Client](#Client)
+    * [new Client([options])](#new_Client_new)
+    * _instance_
+        * [.options](#Client+options) : <code>ClientOptions</code>
+        * [.bots](#Client+bots) : <code>Store.&lt;string, Bot&gt;</code>
+        * [.emojis](#Client+emojis) : <code>Store.&lt;string, Emoji&gt;</code>
+        * [.guilds](#Client+guilds) : <code>Store.&lt;string, Guild&gt;</code>
+        * [.readyAt](#Client+readyAt) : <code>Date</code>
+        * [.readyTimestamp](#Client+readyTimestamp) : <code>number</code>
+        * [.edit([options], [preset])](#Client+edit) ⇒ <code>ClientOptions</code>
+        * [.fetchAllBots(options)](#Client+fetchAllBots) ⇒ <code>Promise.&lt;Array.&lt;Bot&gt;&gt;</code>
+        * [.fetchAllGuilds(options)](#Client+fetchAllGuilds) ⇒ <code>Promise.&lt;Array.&lt;Guild&gt;&gt;</code>
+        * [.fetchAllEmojis(options)](#Client+fetchAllEmojis) ⇒ <code>Promise.&lt;Array.&lt;Emoji&gt;&gt;</code>
+        * [.fetchBot(botID, [options])](#Client+fetchBot) ⇒ <code>Promise.&lt;Bot&gt;</code>
+        * [.fetchEmoji(emojiID, options)](#Client+fetchEmoji) ⇒ <code>Promise.&lt;Emoji&gt;</code>
+        * [.fetchGuild(guildID, [options])](#Client+fetchGuild) ⇒ <code>Promise.&lt;Guild&gt;</code>
+        * [.fetchGuildEmojis(guildID, options)](#Client+fetchGuildEmojis) ⇒ <code>Promise.&lt;Array.&lt;Emoji&gt;&gt;</code>
+        * [.fetchSelf([options])](#Client+fetchSelf) ⇒ <code>Promise.&lt;Bot&gt;</code>
+        * [.fetchStats([options])](#Client+fetchStats) ⇒ <code>Promise.&lt;Stats&gt;</code>
+        * [.fetchUpvotes([options])](#Client+fetchUpvotes) ⇒ <code>Promise.&lt;Array.&lt;PartialUser&gt;&gt;</code>
+        * [.fetchUser(userID, [options])](#Client+fetchUser) ⇒ <code>Promise.&lt;User&gt;</code>
+        * [.hasUpvoted(userID)](#Client+hasUpvoted) ⇒ <code>Promise.&lt;boolean&gt;</code>
+        * [.setGuilds([options])](#Client+setGuilds) ⇒ <code>Promise.&lt;object&gt;</code>
+        * ["ready"](#Client+event_ready)
+        * ["cacheUpdate"](#Client+event_cacheUpdate)
+        * ["post"](#Client+event_post)
+    * _static_
+        * [.endpoint](#Client.endpoint) : <code>string</code>
+        * [.isObject(obj)](#Client.isObject) ⇒ <code>boolean</code>
 
+<a name="new_Client_new"></a>
 
-* * *
+### new Client([options])
 
-## Class: Client
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [options] | <code>ClientOptions</code> | <code>ClientOptions.default</code> | The configuration options. |
 
+<a name="Client+options"></a>
 
+### client.options : <code>ClientOptions</code>
+The Client Options.
 
-## Class: Client
+**Kind**: instance property of [<code>Client</code>](#Client)
+<a name="Client+bots"></a>
 
+### client.bots : <code>Store.&lt;string, Bot&gt;</code>
+Cached bots that are listed on the site, mapped through bot IDs.
 
-**options**: `ClientOptions` , The Client Options.
-**bots**: `Store.&lt;string, Bot&gt;` , Cached bots that are listed on the site, mapped through bot IDs.
-**emojis**: `Store.&lt;string, Emoji&gt;` , Cached emojis that are listed on the site, mapped through emoji IDs.
-**guilds**: `Store.&lt;string, Guild&gt;` , Cached guilds that are listed on the site, mapped through guild IDs.
-**readyAt**: `Date` , Date when Client was initially ready.
-**readyTimestamp**: `number` , The timestamp when Client was initially ready.
-**endpoint**: `string` , The endpoint URL, used to interact with the site.
-### Client.isObject(obj) 
+**Kind**: instance property of [<code>Client</code>](#Client)
+<a name="Client+emojis"></a>
 
-Checks whether or not a given item is an object.
+### client.emojis : <code>Store.&lt;string, Emoji&gt;</code>
+Cached emojis that are listed on the site, mapped through emoji IDs.
 
-**Parameters**
+**Kind**: instance property of [<code>Client</code>](#Client)
+<a name="Client+guilds"></a>
 
-**obj**: `object`, The item to testify against.
+### client.guilds : <code>Store.&lt;string, Guild&gt;</code>
+Cached guilds that are listed on the site, mapped through guild IDs.
 
-**Returns**: `boolean`, Whether or not the item that is testifyed is an object.
+**Kind**: instance property of [<code>Client</code>](#Client)
+<a name="Client+readyAt"></a>
 
-### Client.edit(options, preset) 
+### client.readyAt : <code>Date</code>
+Date when Client was initially ready.
 
+**Kind**: instance property of [<code>Client</code>](#Client)
+<a name="Client+readyTimestamp"></a>
+
+### client.readyTimestamp : <code>number</code>
+The timestamp when Client was initially ready.
+
+**Kind**: instance property of [<code>Client</code>](#Client)
+<a name="Client+edit"></a>
+
+### client.edit([options], [preset]) ⇒ <code>ClientOptions</code>
 Edit at least one or more key-value pair in the instance.
 
-**Parameters**
+**Kind**: instance method of [<code>Client</code>](#Client)
+**Returns**: <code>ClientOptions</code> - The new client options.
 
-**options**: `ClientOptions`, A thing.
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [options] | <code>ClientOptions</code> | <code>ClientOptions.default</code> | A thing. |
+| [preset] | <code>boolean</code> | <code>false</code> | Whether or not to have preset rules when setting values. |
 
-**preset**: `boolean`, Whether or not to have preset rules when setting values.
-
-**Returns**: `ClientOptions`, The new client options.
-
-**Example**:
+**Example**
 ```js
 console.log(Client.edit({ log: false }).options);
 ```
+<a name="Client+fetchAllBots"></a>
 
-### Client.fetchAllBots(options) 
-
+### client.fetchAllBots(options) ⇒ <code>Promise.&lt;Array.&lt;Bot&gt;&gt;</code>
 Returns all bots on the site.
 
-**Parameters**
+**Kind**: instance method of [<code>Client</code>](#Client)
+**Returns**: <code>Promise.&lt;Array.&lt;Bot&gt;&gt;</code> - All bots on the site.
 
-**options**: `FetchOptions`, Fetch Options.
+| Param | Type | Description |
+| --- | --- | --- |
+| options | <code>FetchOptions</code> | Fetch Options. |
 
-**Returns**: `Promise.&lt;Array.&lt;Bot&gt;&gt;`, All bots on the site.
+<a name="Client+fetchAllGuilds"></a>
 
-### Client.fetchAllGuilds(options) 
-
+### client.fetchAllGuilds(options) ⇒ <code>Promise.&lt;Array.&lt;Guild&gt;&gt;</code>
 Fetches all guilds on the site.
 
-**Parameters**
+**Kind**: instance method of [<code>Client</code>](#Client)
+**Returns**: <code>Promise.&lt;Array.&lt;Guild&gt;&gt;</code> - All guilds on the site.
 
-**options**: `FetchOptions`, Fetch Options
+| Param | Type | Description |
+| --- | --- | --- |
+| options | <code>FetchOptions</code> | Fetch Options |
 
-**Returns**: `Promise.&lt;Array.&lt;Guild&gt;&gt;`, All guilds on the site.
+<a name="Client+fetchAllEmojis"></a>
 
-### Client.fetchAllEmojis(options) 
-
+### client.fetchAllEmojis(options) ⇒ <code>Promise.&lt;Array.&lt;Emoji&gt;&gt;</code>
 Fetch all emojis listed on the site.
 
-**Parameters**
+**Kind**: instance method of [<code>Client</code>](#Client)
+**Returns**: <code>Promise.&lt;Array.&lt;Emoji&gt;&gt;</code> - All emojis on the site.
 
-**options**: `FetchOptions`, Fetch Options.
+| Param | Type | Description |
+| --- | --- | --- |
+| options | <code>FetchOptions</code> | Fetch Options. |
 
-**Returns**: `Promise.&lt;Array.&lt;Emoji&gt;&gt;`, All emojis on the site.
+<a name="Client+fetchBot"></a>
 
-### Client.fetchBot(botID, options) 
-
+### client.fetchBot(botID, [options]) ⇒ <code>Promise.&lt;Bot&gt;</code>
 Fetch a bot from the site.
 
-**Parameters**
+**Kind**: instance method of [<code>Client</code>](#Client)
+**Returns**: <code>Promise.&lt;Bot&gt;</code> - Returns the bot contents/specified item.
 
-**botID**: `string`, The bot ID to fetch from the list.
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| botID | <code>string</code> |  | The bot ID to fetch from the list. |
+| [options] | <code>FetchOptions</code> | <code>{}</code> | FetchOptions. |
 
-**options**: `FetchOptions`, FetchOptions.
-
-**Returns**: `Promise.&lt;Bot&gt;`, Returns the bot contents/specified item.
-
-**Example**:
+**Example**
 ```js
 Client.fetchBot('463803888072523797', { specified: 'username' })
  .then(username => console.log(username))
  .catch(console.log);
 ```
+<a name="Client+fetchEmoji"></a>
 
-### Client.fetchEmoji(emojiID, options) 
-
+### client.fetchEmoji(emojiID, options) ⇒ <code>Promise.&lt;Emoji&gt;</code>
 Fetch an emoji listed on the site.
 
-**Parameters**
+**Kind**: instance method of [<code>Client</code>](#Client)
+**Returns**: <code>Promise.&lt;Emoji&gt;</code> - Returns the emoji contents/specified item.
 
-**emojiID**: `string`, The emoji ID to fetch.
+| Param | Type | Description |
+| --- | --- | --- |
+| emojiID | <code>string</code> | The emoji ID to fetch. |
+| options | <code>FetchOptions</code> | Fetch Options. |
 
-**options**: `FetchOptions`, Fetch Options.
+<a name="Client+fetchGuild"></a>
 
-**Returns**: `Promise.&lt;Emoji&gt;`, Returns the emoji contents/specified item.
-
-### Client.fetchGuild(guildID, options) 
-
+### client.fetchGuild(guildID, [options]) ⇒ <code>Promise.&lt;Guild&gt;</code>
 Fetch a guild on the list.
 
-**Parameters**
+**Kind**: instance method of [<code>Client</code>](#Client)
+**Returns**: <code>Promise.&lt;Guild&gt;</code> - Returns the guild contents/specified item.
 
-**guildID**: `string`, The guild ID to fetch from the list.
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| guildID | <code>string</code> |  | The guild ID to fetch from the list. |
+| [options] | <code>FetchOptions</code> | <code>{}</code> | Supply if you want to get a specific value, etc. 'prefix' |
 
-**options**: `FetchOptions`, Supply if you want to get a specific value, etc. 'prefix'
+<a name="Client+fetchGuildEmojis"></a>
 
-**Returns**: `Promise.&lt;Guild&gt;`, Returns the guild contents/specified item.
-
-### Client.fetchGuildEmojis(guildID, options) 
-
+### client.fetchGuildEmojis(guildID, options) ⇒ <code>Promise.&lt;Array.&lt;Emoji&gt;&gt;</code>
 Fetches a guild's emojis.
 
-**Parameters**
+**Kind**: instance method of [<code>Client</code>](#Client)
+**Returns**: <code>Promise.&lt;Array.&lt;Emoji&gt;&gt;</code> - The array of the guild's emojis.
 
-**guildID**: `string`, The guild ID to fetch its emojis from.
+| Param | Type | Description |
+| --- | --- | --- |
+| guildID | <code>string</code> | The guild ID to fetch its emojis from. |
+| options | <code>FetchOptions</code> | Fetch Options. |
 
-**options**: `FetchOptions`, Fetch Options.
+<a name="Client+fetchSelf"></a>
 
-**Returns**: `Promise.&lt;Array.&lt;Emoji&gt;&gt;`, The array of the guild's emojis.
-
-### Client.fetchSelf(options) 
-
+### client.fetchSelf([options]) ⇒ <code>Promise.&lt;Bot&gt;</code>
 Fetch a bot using the ID supplied on initialization.
 
-**Parameters**
+**Kind**: instance method of [<code>Client</code>](#Client)
+**Returns**: <code>Promise.&lt;Bot&gt;</code> - Returns the bot contents/specified item.
 
-**options**: `FetchOptions`, Options.
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [options] | <code>FetchOptions</code> | <code>{}</code> | Options. |
 
-**Returns**: `Promise.&lt;Bot&gt;`, Returns the bot contents/specified item.
+<a name="Client+fetchStats"></a>
 
-### Client.fetchStats(options) 
-
+### client.fetchStats([options]) ⇒ <code>Promise.&lt;Stats&gt;</code>
 Fetch the site statistics.
 
-**Parameters**
+**Kind**: instance method of [<code>Client</code>](#Client)
+**Returns**: <code>Promise.&lt;Stats&gt;</code> - Returns site stats/specified value.
 
-**options**: `FetchOptions`, Supply if you want a specific value, etc. 'guilds' or 'bots'
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [options] | <code>FetchOptions</code> | <code>{}</code> | Supply if you want a specific value, etc. 'guilds' or 'bots' |
 
-**Returns**: `Promise.&lt;Stats&gt;`, Returns site stats/specified value.
+<a name="Client+fetchUpvotes"></a>
 
-### Client.fetchUpvotes(options) 
-
+### client.fetchUpvotes([options]) ⇒ <code>Promise.&lt;Array.&lt;PartialUser&gt;&gt;</code>
 Fetch users in the last 24 hours who have upvoted your bot.
 
-**Parameters**
+**Kind**: instance method of [<code>Client</code>](#Client)
+**Returns**: <code>Promise.&lt;Array.&lt;PartialUser&gt;&gt;</code> - The array of the user objects/user IDs.
 
-**options**: `UpvoteFetchOptions`, Upvote Fetch Options.
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [options] | <code>UpvoteFetchOptions</code> | <code>{}</code> | Upvote Fetch Options. |
 
-**Returns**: `Promise.&lt;Array.&lt;PartialUser&gt;&gt;`, The array of the user objects/user IDs.
-
-**Example**:
+**Example**
 ```js
 Client.fetchUpvotes({ ids: true });
 ```
+<a name="Client+fetchUser"></a>
 
-### Client.fetchUser(userID, options) 
-
+### client.fetchUser(userID, [options]) ⇒ <code>Promise.&lt;User&gt;</code>
 Fetches a user that had logged on to botlist.space
 
-**Parameters**
+**Kind**: instance method of [<code>Client</code>](#Client)
+**Returns**: <code>Promise.&lt;User&gt;</code> - Returns the user contents/specified item.
 
-**userID**: `string`, The user ID to fetch.
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| userID | <code>string</code> |  | The user ID to fetch. |
+| [options] | <code>FetchOptions</code> | <code>{}</code> | FetchOptions. |
 
-**options**: `FetchOptions`, FetchOptions.
+<a name="Client+hasUpvoted"></a>
 
-**Returns**: `Promise.&lt;User&gt;`, Returns the user contents/specified item.
-
-### Client.hasUpvoted(userID) 
-
+### client.hasUpvoted(userID) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Checks if a user has upvoted your bot.
 
-**Parameters**
+**Kind**: instance method of [<code>Client</code>](#Client)
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - Whether or not the user has upvoted your bot.
 
-**userID**: `string`, The user ID to check if they have upvoted your bot.
+| Param | Type | Description |
+| --- | --- | --- |
+| userID | <code>string</code> | The user ID to check if they have upvoted your bot. |
 
-**Returns**: `Promise.&lt;boolean&gt;`, Whether or not the user has upvoted your bot.
+<a name="Client+setGuilds"></a>
 
-### Client.setGuilds(options) 
+### client.setGuilds([options]) ⇒ <code>Promise.&lt;object&gt;</code>
+**Kind**: instance method of [<code>Client</code>](#Client)
+**Returns**: <code>Promise.&lt;object&gt;</code> - Returns the code, and a message.
+**Emits**: [<code>post</code>](#Client+event_post)
 
-**Parameters**
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [options] | <code>PostOptions</code> |  | Post Options. |
+| [options.token] | <code>string</code> | <code>&quot;this.options.token&quot;</code> | The API token for posting. |
+| [options.botID] | <code>string</code> | <code>&quot;this.options.botID&quot;</code> | The bot ID for posting. |
+| [options.guildSize] | <code>string</code> |  | The number (if no shards)/an array of numbers (if shards) to push to the API. Unneeded if a client was supplied. |
 
-**options**: `PostOptions`, Post Options.
+<a name="Client+event_ready"></a>
 
- - **options.token**: `string`, The API token for posting.
+### "ready"
+Emitted when cache is ready/cache was never run but it still returned something.
 
- - **options.botID**: `string`, The bot ID for posting.
+**Kind**: event emitted by [<code>Client</code>](#Client)
+**Properties**
 
- - **options.guildSize**: `string`, The number (if no shards)/an array of numbers (if shards) to push to the API. Unneeded if a client was supplied.
+| Name | Type |
+| --- | --- |
+| bots | <code>Store.&lt;string, Bot&gt;</code> |
+| guilds | <code>Store.&lt;string, Guild&gt;</code> |
+| emojis | <code>Store.&lt;string, Emoji&gt;</code> |
 
-**Fires**: Client#event:post
+<a name="Client+event_cacheUpdate"></a>
 
-**Returns**: `Promise.&lt;object&gt;`, Returns the code, and a message.
+### "cacheUpdate"
+Emitted when cache is updated.
 
+**Kind**: event emitted by [<code>Client</code>](#Client)
+**Properties**
 
+| Name | Type |
+| --- | --- |
+| bots | <code>Store.&lt;string, Bot&gt;</code> |
+| guilds | <code>Store.&lt;string, Guild&gt;</code> |
+| emojis | <code>Store.&lt;string, Emoji&gt;</code> |
 
-* * *
+<a name="Client+event_post"></a>
 
+### "post"
+Emitted when a post is performed.
 
+**Kind**: event emitted by [<code>Client</code>](#Client)
+**Properties**
 
+| Name | Type |
+| --- | --- |
+| code | <code>number</code> |
+| message | <code>string</code> |
 
+<a name="Client.endpoint"></a>
 
+### Client.endpoint : <code>string</code>
+The endpoint URL, used to interact with the site.
 
+**Kind**: static property of [<code>Client</code>](#Client)
+<a name="Client.isObject"></a>
 
+### Client.isObject(obj) ⇒ <code>boolean</code>
+Checks whether or not a given item is an object.
 
+**Kind**: static method of [<code>Client</code>](#Client)
+**Returns**: <code>boolean</code> - Whether or not the item that is testifyed is an object.
 
-
+| Param | Type | Description |
+| --- | --- | --- |
+| obj | <code>object</code> | The item to testify against. |
